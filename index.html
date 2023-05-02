@@ -7,17 +7,30 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
+    <!--<div class="container">
         <h1 id="saludo"></h1>
         <h2>Actualemente tiene el color: </h2>
-        <!--<div id="colorSelected"></div>
-        <label for="colorPicker">Selecciona un color:</label>
-        <input type="color" id="colorPicker">
-        <label for="colorPicker">Color seleccionado:</label>-->
         <input type="color" id="color-picker" value="#0000ff">
         <br>
         <button class="btn-primario" onclick="mostrarColor()">Mostrar color seleccionado</button>
         <p id="texto"></p>
+    </div>-->
+    <div class="container">
+        <h1 id="saludo"></h1>
+        <h2>Actualemente tiene el color: </h2>
+        <div class="col">
+            <div class="row">
+                <div id="picker"></div>
+            </div>
+            <div class="row">
+                <h3> Color Preview </h3>
+                <div id="preview"></div>
+            </div>
+            <div>
+                <button class="btn-primario" onclick="mostrarColor()">Mostrar color seleccionado</button>
+                <p id="texto"></p>
+            </div>
+        </div>
     </div>
     <script type="text/javascript" src="script.js"></script>
 </body>
