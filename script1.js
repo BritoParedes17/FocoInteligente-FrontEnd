@@ -4,12 +4,33 @@ const colorSelected = document.querySelector('#colorSelected');
 const saludo = document.getElementById('saludo');
 const hora = new Date().getHours();
 
+const slider = document.getElementById("mySlider");
+const output = document.getElementById("sliderValue");
+output.innerHTML = slider.value;
+
 if (hora >= 6 && hora < 12) {
   saludo.textContent = "Buenos días";
 } else if (hora >= 12 && hora < 20) {
   saludo.textContent = "Buenas tardes";
 } else {
   saludo.textContent = "Buenas noches";
+}
+
+/// redirecciones para navegacion /////////
+function irAInicio() {
+  window.location.href = "index.html";
+}
+
+function irASeleccionarFoco() {
+  window.location.href = "selectFoco.html";
+}
+
+function irAAñadirFoco() {
+  window.location.href = "añadir-foco.html";
+}
+
+function irColorSelect() {
+  window.location.href = "colorSelectPage.html";
 }
 
 
@@ -27,12 +48,30 @@ function hexToRgb(hex) {
 function mostrarColor() {
     var color = document.getElementById('picker').value;
     console.log(rgb[0] + ","+rgb[1]+", "+rgb[2]);
+    var colorRequest = 'http://192.168.1.82/rgb?red='+rgb[0]+'&green='+rgb[1]+'&blue='+rgb[2] 
+    console.log(colorRequest);
+    fetch(colorRequest)
+    .then(response => response.text())
+    .then(text => console.log(text))
     mostrarTexto();
 }
 
 function mostrarTexto(colorTexto) {
     document.getElementById("texto").innerHTML = "Su color RGB: " + rgb[0] + ", "+rgb[1]+", "+rgb[2] +" ha sido guardado";
 }
+
+////////Funcion para slider//////
+slider.oninput = function() {
+  output.innerHTML = this.value;
+
+  var brilloRequest = 'http://192.168.1.82/brightness?brightness='+this.value;
+    console.log(brilloRequest);
+    fetch(brilloRequest)
+    .then(response => response.text())
+    .then(text => console.log(text))
+}
+
+//////// CODIGO PARA EL COLOR PICKER - ¡¡NO TOCAR!! XD //////////////// 
 
 var ColorPicker;
 
