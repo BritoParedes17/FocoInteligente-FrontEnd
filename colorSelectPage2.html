@@ -6,9 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <nav>
-        <nav>
-            <h2>Foco 2</h2>
-        </nav>
+        <h2>Foco 2</h2>
     </nav>
 </head>
 <body>
@@ -31,13 +29,27 @@
                 <h3></h3>
                 <div id="preview"></div>
             </div>
-            <div>
-                <button class="btn-primario" onclick="mostrarColor()">Mostrar color seleccionado</button>
-                <p id="texto"></p>
-            </div>
             <div class="slider-container">
                 <input type="range" min="1" max="250" value="250" class="slider" id="mySlider">
                 <p>Intensidad: <span id="sliderValue"></span></p>
+            </div>
+            <br>
+            <!-- Modo rainbow -->
+            <button class="btn-rainbow" id="buttonRainbow">Modo Rainbow</button>
+            
+            <div class="slider-container" id="sliderRainbow" style="display: none;">
+                <br>
+                <input type="range" min="1" max="250" value="250" class="slider" id="rainbowSlider">
+                <p>Intensidad: <span id="valueRainbow"></span></p>
+            </div>
+            <br><br>
+            <!-- Modo teather -->
+            <button class="btn-theater" id="buttonTheater">Modo Theater</button>
+            
+            <div class="slider-container" id="sliderTheater" style="display: none;">
+                <br>
+                <input type="range" min="1" max="250" value="250" class="slider" id="theaterSlider">
+                <p>Intensidad: <span id="valueTheater"></span></p>
             </div>
         </div>
     </div>

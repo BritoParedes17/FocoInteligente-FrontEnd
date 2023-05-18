@@ -4,9 +4,31 @@ const colorSelected = document.querySelector('#colorSelected');
 const saludo = document.getElementById('saludo');
 const hora = new Date().getHours();
 
+const baseURL = "http://192.168.1.82/";
+
+////Constantes slider color 
 const slider = document.getElementById("mySlider");
 const output = document.getElementById("sliderValue");
 output.innerHTML = slider.value;
+////
+
+////Constantes slider rainbow
+var btnRainbow = document.getElementById('buttonRainbow');
+
+const containerRainbow = document.getElementById('sliderRainbow');
+const sliderR = document.getElementById('rainbowSlider');
+const outputR = document.getElementById('valueRainbow');
+outputR.innerHTML = sliderR.value;
+//////
+
+////Constantes slider Theater
+var btnTheater = document.getElementById('buttonTheater');
+
+const containerTheater = document.getElementById('sliderTheater');
+const sliderT = document.getElementById('theaterSlider');
+const outputT = document.getElementById('valueTheater');
+outputT.innerHTML = sliderT.value;
+//////
 
 if (hora >= 6 && hora < 12) {
   saludo.textContent = "Buenos días";
@@ -44,29 +66,70 @@ function hexToRgb(hex) {
     console.log(r+", "+g+", "+b);
 }
 
-//Función que guardará y enviará los valores a la base de datos 
+////Función que guardará y enviará los valores
 function mostrarColor() {
     var color = document.getElementById('picker').value;
     console.log(rgb[0] + ","+rgb[1]+", "+rgb[2]);
-    var colorRequest = 'http://192.168.1.82/rgb?red='+rgb[0]+'&green='+rgb[1]+'&blue='+rgb[2] 
+    var colorRequest = baseURL+'rgb?red='+rgb[0]+'&green='+rgb[1]+'&blue='+rgb[2] 
     console.log(colorRequest);
-    fetch(colorRequest)
+    fetch(colorRequest, {mode: 'no-cors'})
     .then(response => response.text())
     .then(text => console.log(text))
     mostrarTexto();
 }
+////
 
 function mostrarTexto(colorTexto) {
     document.getElementById("texto").innerHTML = "Su color RGB: " + rgb[0] + ", "+rgb[1]+", "+rgb[2] +" ha sido guardado";
 }
 
-////////Funcion para slider//////
+//////// MODO RAINBOW ////////
+btnRainbow.addEventListener('click', function() {
+  if (containerRainbow.style.display === 'none') {
+    containerRainbow.style.display = 'block';
+  } else {
+    containerRainbow.style.display = 'none';
+  }
+});
+sliderR.oninput = function() {
+  outputR.innerHTML = this.value;
+
+  /*var brilloRainbow = baseURL+'rainbow?w='+this.value;
+    console.log(brilloRequest);
+    fetch(brilloRequest, {mode: 'no-cors'})
+    .then(response => response.text())
+    .then(text => console.log(text))*/
+}
+////
+
+//////// MODO THEATER ////////
+btnTheater.addEventListener('click', function() {
+  if (containerTheater.style.display === 'none') {
+    containerTheater.style.display = 'block';
+  } else {
+    containerTheater.style.display = 'none';
+  }
+});
+sliderT.oninput = function() {
+  outputT.innerHTML = this.value;
+
+  /*var brilloRequest = baseURL+'theater?w='+this.value;
+    console.log(brilloRequest);
+    fetch(brilloRequest, {mode: 'no-cors'})
+    .then(response => response.text())
+    .then(text => console.log(text))*/
+}
+////
+
+
+
+////////Funcion para slider brillo//////
 slider.oninput = function() {
   output.innerHTML = this.value;
 
-  var brilloRequest = 'http://192.168.1.82/brightness?brightness='+this.value;
+  var brilloRequest = baseURL+'brightness?brightness='+this.value;
     console.log(brilloRequest);
-    fetch(brilloRequest)
+    fetch(brilloRequest, {mode: 'no-cors'})
     .then(response => response.text())
     .then(text => console.log(text))
 }
@@ -558,5 +621,11 @@ var colorPreview = document.getElementById('preview');
 var picker = new ColorPicker(document.getElementById('picker'), {
   onUpdate: function(rgb) {
     colorPreview.style.background = "rgb(" + rgb[0] + ", " + rgb[1] + ", " + rgb[2] + ")";
+    /* cambiar de color en tiempo real */
+    var colorRequest = baseURL+'rgb?red='+rgb[0]+'&green='+rgb[1]+'&blue='+rgb[2] 
+    console.log(colorRequest);
+    fetch(colorRequest, {mode: 'no-cors'})
+    .then(response => response.text())
+    .then(text => console.log(text))  
   }
 });
